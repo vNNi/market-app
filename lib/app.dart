@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './widgets/bottomNavigation.dart';
 import './screens/home.dart';
+import './screens/add_item.dart';
 
 class Market extends StatefulWidget {
   Market({Key key, this.title}) : super(key: key);
@@ -20,7 +21,14 @@ class _MarketState extends State<Market> {
       _counter++;
     });
   }
-
+  int _elementIndex = 0;
+ 
+  void handleClick(index){
+    setState(() {
+      _elementIndex = index;
+    });
+  }
+  var screens = [Home(), AddItem()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +36,9 @@ class _MarketState extends State<Market> {
         title: Text(widget.title),
       ),
       body: Container(
-        child: Home(),
+        child: screens.elementAt(_elementIndex),
       ),
-      bottomNavigationBar: Navigation(),
+      bottomNavigationBar: Navigation(handleClick: this.handleClick, currentIndex: _elementIndex),
     );
   }
 }

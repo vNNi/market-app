@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Navigation extends StatelessWidget {
+  final Function handleClick;
+  final int currentIndex;
+
+  Navigation({this.handleClick, this.currentIndex});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,6 +19,10 @@ class Navigation extends StatelessWidget {
             title: Text('Adicionar'),
           ),
         ],
+        onTap: (index){
+          handleClick(index);
+        },
+        currentIndex: currentIndex,
       ),
     );
   }
